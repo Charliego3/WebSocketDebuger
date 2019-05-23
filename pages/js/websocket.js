@@ -220,12 +220,20 @@ let isPause = false;
             if (socket) {
                 socket.close();
             }
+            // 恢复暂停按钮
+            isPause = false;
+            $win.find('#btn_pause').attr("class", "btn btn-xs btn-danger");
+            $win.find('#btn_pause').text("暂停接收消息");
         });
 
         //关闭按钮
         $win.find('#btn_reConn').click(function () {
             $win.find('#btn_close').trigger("click");
             reConnect = true;
+            // 恢复暂停按钮
+            isPause = false;
+            $win.find('#btn_pause').attr("class", "btn btn-xs btn-danger");
+            $win.find('#btn_pause').text("暂停接收消息");
         });
 
         //发送按钮
