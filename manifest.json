@@ -1,0 +1,36 @@
+{
+    "name": "WebSocketDebuger",
+    "version": "0.6",
+    "manifest_version": 2,
+    "description": "WebSocket调试工具, JSON格式化, JSON折叠",
+    "icons": {
+        "16": "pages/img/logo.png"
+    },
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "main.js"
+        ]
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline'; object-src 'self' 'unsafe-eval' 'unsafe-inline'",
+    "content_scripts": [
+        {
+            "js": [
+                "pages/wstest.html",
+                "pages/js/jquery-3.2.1.min.js",
+                "pages/js/jsonFormat.js",
+                "pages/js/websocket.js"
+            ],
+            "matches": [
+                "http://*/"
+            ]
+        }
+    ],
+    "permissions": [
+        "tabs"
+    ],
+    "browser_action": {
+        "default_icon": "pages/img/logo.png",
+        "default_title": "Click to start!"
+    }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>WebSocket调试工具</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jsonFormat.js"></script>
+    <script src="js/websocket.js"></script>
+</head>
+
+<body>
+    <div class="container">
+<!--        <div class="page-header">-->
+<!--            <h2 style="margin-top:-20px;margin-left:20px; text-align:center; ">WebSocket调试工具</h2>-->
+<!--        </div>-->
+<!--        <div class="row" style="margin-bottom: -20px;">-->
+        <div class="row">
+<!--            <div class="col-sm-5 col-md-4 col-lg-3">-->
+                <div>
+<!--                    <b>连接地址:</b>-->
+<!--                    <input type="text" class="form-control" style="margin-bottom:3px;" id="inp_url" placeholder="连接的地址"-->
+<!--                        value="">-->
+<!--                    <br/>-->
+<!--                    <b>保留消息数:</b>-->
+<!--                    <input type="text" class="form-control" style="margin-bottom:3px;" id="inp_msgCount" placeholder="5"-->
+<!--                        value="5">-->
+<!--                    <br/>-->
+                </div>
+                <br/>
+<!--                <div style="margin-bottom:20px;">-->
+<!--                    <textarea id="inp_send" class="form-control" style="margin-bottom:3px;min-height:206px;" placeholder="发送的内容"></textarea>-->
+<!--                    <br>-->
+<!--                    <button type="button" id="btn_send" class="btn btn-info btn-block">发送（ctrl+回车）</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-sm-7 col-md-8 col-lg-9">-->
+<!--                <div id="div_msgzone" class="panel panel-primary" style="border-radius: 5px;border-style: solid;">-->
+<!--                    <div style="padding: 10px 15px;border-bottom: 1px solid transparent;background-color: #447ab2;" id="msgTitle">-->
+<!--                        <span class="label label-default">未连接</span>-->
+<!--                    </div>-->
+<!--                    <div id="div_msg" class="panel-body" style="min-height:420px;"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+        <div class="row" style="margin-bottom:20px;">
+            <div style="border-radius: 5px;border-style: solid;" class="panel panel-primary">
+                <div style="display: block;padding: 10px 15px;border-bottom: 1px solid transparent;background-color: #447ab2;" id="msgTitle">
+                    <div style="display: initial;" id="connectState">
+                        <span class="label label-default">未连接</span>
+                    </div>
+
+                    <div id="topView" style="display: initial;margin-top: -3px;padding-left: 10px;">
+                        <button type="button" id="btn_conn" class="btn btn-xs" style="background-color: white;">连接</button>
+                        <button type="button" id="btn_close" class="btn btn-xs btn-danger" disabled="disabled">断开</button>
+                        <button type="button" id="btn_reConn" class="btn btn-xs btn-success" disabled="disabled">重连</button>
+                        <span class="btn btn-xs btn-default" class="checkbox" id="btn_clear">清空消息</span>
+                        <input type="text" class="form-control col-sm-3 col-md-3 col-xs-3" style="margin-right: 10px;" id="inp_url" placeholder="连接地址" value="">
+                        <input type="text" class="form-control col-sm-1 col-md-1 col-xs-1" style="margin-right: 10px;" id="inp_msgCount" placeholder="消息数: 100">
+                        <div id="connectTime" style="display: initial;float: right" class="blockquote-reverse"></div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;padding-left: 15px;padding-right: 15px;">
+                        <textarea id="inp_send" class="form-control col-md-10 col-sm-10 col-xs-9" style="" rows="1" style="margin-right: 10px;" placeholder="发送的内容"></textarea> <!--  style="margin-bottom:3px;min-height:206px;" -->
+                        <!--                        <input type="text" class="form-control col-sm-3 col-md-3 col-xs-3" style="margin-right: 10px;" id="inp_send" placeholder="发送的内容">-->
+                        <button type="button" id="btn_send" class="btn btn-sm btn-info col-md-2 col-xs-3 col-sm-2">发送（ctrl+回车）</button> <!--  style="position:absolute;right: 70px;top: 68px;" -->
+                    </div>
+                </div>
+                <div id="div_msgzone" class="panel panel-primary">
+                    <div id="div_msg" class="panel-body" style="min-height:420px;"></div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="row" style="margin-top:20px;">-->
+<!--            <div class="col-md-4"></div>-->
+<!--            <div class="col-md-4 cent" style="text-align:center;"><b><a href="mailto:helyho@gmail.com">Author: helyho</a></b></div>-->
+<!--            <div class="col-md-4"></div>-->
+<!--        </div>-->
+    </div>
+
+</body>
+
+</html>
