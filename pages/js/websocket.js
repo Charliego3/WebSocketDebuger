@@ -104,13 +104,24 @@ let msgs = new Map();
                 const row = '<div class="row">';
                 // const title = '<div style="float: left;padding-right: 10px;padding-left: 10px;"><span class="label label-' + style + '">' + type + '</span> </div> ';
                 const title = `<div style="float: left;padding-right: 10px;padding-left: 10px;">
-                    <button type="button" id="btn_close" style="height: 22px;" onclick="showArray(${msgCount})" class="btn btn-xs btn-${style}">${type}</button></div>`;
+                    <button type="button" id="btn_show_array_${msgCount}" style="height: 22px;" class="btn btn-xs btn-${style}">${type}</button></div>`;
                 const body = '<div style="padding-right: 185px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + msg + '</div>';
                 const timeStr = `<div style="float: right;padding-right: 10px;margin-top: -20px;" class="blockquote-reverse">
                         ${datetime.format("yyyy-MM-dd hh:mm:ss.S").toString()}</div>`;
                 const rowEnd = '</div>';
                 const $type = $('<div class="panel-heading">').html(row + title + body + timeStr + rowEnd).appendTo($p);
 
+                var index = msgCount;
+                $win.find(`#btn_show_array_${index}`).click(function() {
+                    let msg = msgs.get(index);
+                    let $arrayPanel = $(`.panel-body #respPanel${index}`);
+                    let $arrayPanelBody = $(`.panel-body #respPanel${index} .panel-body`);
+                    if ($arrayPanelBody.html() === undefined) {
+                        $('<div class="panel-body">').css("padding", "0 10px").html(msg).appendTo($arrayPanel);
+                    } else {
+                        $arrayPanelBody.remove();
+                    }
+                });
 
                 try {
                     const testObj = eval("a=" + msg);
@@ -146,7 +157,6 @@ let msgs = new Map();
         $win.find('#btn_conn').click(function () {
             //连接按钮
             const url = $win.find('#inp_url').val();
-            console.log(url);
             if (url === '') {
                 alert("请输入链接地址");
                 return;
@@ -209,7 +219,6 @@ let msgs = new Map();
             setCookie("LastSend", msg);
 
             if (!socket) {
-                console.log(socket);
                 showMessage("WebSocket 未连接.", 3);
                 return;
             }
@@ -241,7 +250,6 @@ function clearMsg() {
 function showArray(index) {
     let msg = msgs.get(index);
     let $arrayPanel = $(`.panel-body #respPanel${index}`);
-    console.log($arrayPanel.html());
     let $arrayPanelBody = $(`.panel-body #respPanel${index} .panel-body`);
     if ($arrayPanelBody.html() === undefined) {
         $('<div class="panel-body">').css("padding", "0 10px").html(msg).appendTo($arrayPanel);
