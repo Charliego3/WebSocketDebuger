@@ -68,6 +68,7 @@ let $win;
 let msgCount = 0;
 let reConnect = false;
 let msgs = new Map();
+let isPause = false;
 
 (function (window, undefined) {
     $(function () {
@@ -153,6 +154,7 @@ let msgs = new Map();
         $win.find('#btn_conn').attr('disabled', false);
         $win.find('#btn_reConn').attr('disabled', true);
         $win.find('#btn_close').attr('disabled', true);
+        $win.find('#btn_pause').attr('disabled', true);
 
         $win.find('#btn_conn').click(function () {
             //连接按钮
@@ -182,21 +184,35 @@ let msgs = new Map();
             };
             // 监听消息
             socket.onmessage = function (eve) {
-                showMessage(eve.data, 2);
+                if (!isPause) {
+                    showMessage(eve.data, 2);
+                }
             };
             // 监听Socket的关闭
             socket.onclose = function (event) {
                 socket = null;
-                $("#connectState").html(buildConnectState("断开", "danger"));
+                $("#connectState").html(buildConnectState("断开连接", "danger"));
                 $win.find('#btn_conn').attr('disabled', false);
                 $win.find('#btn_close').attr('disabled', true);
                 $win.find('#btn_reConn').attr('disabled', true);
+                $win.find('#btn_pause').attr('disabled', true);
                 if (reConnect) {
                     $win.find('#btn_conn').trigger("click");
                     reConnect = false;
                 }
 
             };
+        });
+
+        $win.find('#btn_pause').click(function () {
+            isPause = !isPause;
+            if (isPause) {
+                $(this).attr("class", "btn btn-xs btn-success");
+                $(this).text("恢复接收消息");
+            } else {
+                $(this).attr("class", "btn btn-xs btn-danger");
+                $(this).text("暂停接收消息");
+            }
         });
 
         //关闭按钮
@@ -226,6 +242,7 @@ let msgs = new Map();
             if (socket && msg) {
                 socket.send(msg);
                 showMessage(msg, 1);
+                $win.find('#btn_pause').attr('disabled', false);
             }
 
         });
