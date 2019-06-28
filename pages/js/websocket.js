@@ -119,6 +119,7 @@ let isPause = false;
                     let $arrayPanelBody = $(`.panel-body #respPanel${index} .panel-body`);
                     if ($arrayPanelBody.html() === undefined) {
                         $('<div class="panel-body">').css("padding", "0 10px").html(msg).appendTo($arrayPanel);
+                        attachEvent();
                     } else {
                         $arrayPanelBody.remove();
                     }
@@ -140,7 +141,6 @@ let isPause = false;
                     $('#respPanel' + (msgCount - maxSize)).remove();
                     msgs.delete(msgCount - maxSize);
                 }
-                attachEvent();
                 msgCount++;
             } else {
                 const $center = $('<center>').text(msg + '(' + tiemstr + ')').css({'font-size': '12px'}).appendTo($win.find('#div_msg'));
